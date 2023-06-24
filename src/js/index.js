@@ -1,27 +1,47 @@
 //import react into the bundle
 import React from "react";
 import ReactDOM from "react-dom";
-
-// include your styles into the webpack bundle
-import "../styles/index.css";
+import PropTypes from "prop-types"; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 
-function SimpleCounter(props){
-    return (<div className="BigCounterContainer">
-        <div></div>
-        <div className="Clock">
-        <FontAwesomeIcon icon={faClock} />
-            </div>
-        <div className="HundredThousands">6</div>
-        <div className="TenThousands">5</div>
-        <div className="Thousands">4</div>
-        <div className="Hundreds">3</div>
-        <div className="Tenths">2</div>
-        <div className="Units">1</div>
-        </div>)
-}
+// include your styles into the webpack bundle
+import "../styles/index.css";
 
 
-//render your react application
-ReactDOM.render(<SimpleCounter />, document.querySelector("#app"));
+const SimpleCounter = (props) => {
+    return (
+        <div className="BigCounterContainer">
+         <div className="Clock"><FontAwesomeIcon icon={faClock}/> </div>
+         <div className="TenThousands">{props.digitFive%10} </div>
+         <div className="Thousands">{props.digitFour%10} </div>
+         <div className="Hundreds">{props.digitThree%10} </div>
+         <div className="Tenths">{props.digitTwo%10} </div>
+         <div className="Units">{props.digitOne%10} </div>
+         <div className="Fatal-Text">Your time is near </div>
+         </div>
+        )
+        }
+    
+SimpleCounter.PropTypes = {
+    digitFive: PropTypes.number,
+    digitFour: PropTypes.number,
+    digitThree: PropTypes.number,
+    digitTwo: PropTypes.number,
+    digitOne: PropTypes.number
+};
+
+let counter = 0;
+setInterval (function() {
+    const five = Math.floor(counter/10000);
+    const four = Math.floor(counter/1000);
+    const three = Math.floor(counter/100);
+    const two = Math.floor(counter/10);
+    const one = Math.floor(counter/1);
+    counter++;
+    console.log(one,two,three,four,five);
+     //render your react application
+ReactDOM.render(<SimpleCounter  digitOne={one} digitTwo={two} digitThree={three} digitFour={four} digitFive={five}  />, document.querySelector("#app")
+);
+},1000);
+

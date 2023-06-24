@@ -2,19 +2,16 @@
     justify-content: center;
     background-color: black;
     width: 440px;
-    height: 120px;
     text-align: center;
     }
     
 .BigCounterContainer div{
-    display: inline;
+    display: inline-block;
     justify-content: center;
     align-items: center;
     font-size: 80px;
     color: greenyellow;
     font-family:Impact;
-    padding: 5px;
-    margin: 2px rgb(45, 233, 45);
-
-
-}
+    padding: 4px;
+    margin: 3px;
+    }
